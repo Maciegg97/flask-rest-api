@@ -18,6 +18,8 @@ env = "*"
 flask-uploads = "*"
 werkzeug = "*"
 flask-reuploaded = "*"
+stripe = "*"
+flask-bcrypt = "*"
 
 [dev-packages]
 

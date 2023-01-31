@@ -2,6 +2,7 @@ import traceback
 from flask_restful import Resource
 from flask import request
 from hmac import compare_digest
+from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_jwt_extended import (
     create_access_token,
     create_refresh_token,
@@ -23,6 +24,8 @@ class UserRegister(Resource):
     @classmethod
     def post(cls):
         user_json = request.get_json()
+        hashed_password = generate_password_hash(user_json['password'])
+        user_json['password'] = hashed_password
         user = user_schema.load(user_json)
 
         if UserModel.find_by_username(user.username):
@@ -79,7 +82,7 @@ class UserLogin(Resource):
 
         user = UserModel.find_by_username(user_data.username)
 
-        if user and compare_digest(user.password, user_data.password):
+        if user and check_password_hash(user.password, user_data.password):
             confirmation = user.most_recent_confirmation
             if confirmation and confirmation.confirmed:
                 access_token = create_access_token(user.id, fresh=True)

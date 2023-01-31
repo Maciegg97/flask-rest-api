@@ -37,6 +37,8 @@
   "image_delete_failed": "Internal server error! Failed to delete image.",
   "avatar_delete_failed": "Internal server error! Failed to delete avatar.",
   "avatar_uploaded": "Avatar '{}' uploaded.",
-  "avatar_nor_found": "Avatar not found."
+  "avatar_nor_found": "Avatar not found.",
+  "order_item_by_id_not_found": "An item <id={}> in this order cannot be found.",
+  "order_error": "Order failed, please contact support."
 
 }
